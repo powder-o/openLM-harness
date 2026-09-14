@@ -1,0 +1,40 @@
+[project]
+name = "study"
+version = "0.1.0"
+description = "Study App POC backend: ingestion, index, graph, study tools, and dsh-backed chat"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.30",
+  "python-multipart>=0.0.9",
+  "pydantic>=2.8",
+  "docling>=2.40",
+  "pymupdf>=1.24",
+  "sentence-transformers>=3.0",
+  "numpy>=1.26",
+  "networkx>=3.4",
+  "rapidfuzz>=3.0",
+  "graspologic-native>=1.2",
+  "openai>=1.40",
+  "mcp>=1.10",
+  "httpx>=0.27",
+  # DeepSeek Harness Python SDK; its runtime-bin dependency bundles the dsh CLI as a
+  # standalone executable (no Node needed). Pinned: agent/study.patch.template.yml
+  # disables tool rows by id, and those ids are specific to this runtime version.
+  "deepseek-harness-sdk==0.1.5rc1",
+]
+
+[dependency-groups]
+dev = ["pytest>=8", "reportlab>=4", "matplotlib>=3.8"]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+markers = [
+  "docling: slow tests that run the real docling parser and download its models",
+  "dsh: tests that launch the bundled dsh runtime against tests/mock_llm.py",
+]

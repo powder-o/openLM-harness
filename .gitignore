@@ -1,0 +1,10 @@
+data/
+backend/.venv/
+backend/spike/out/
+frontend/node_modules/
+frontend/dist/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+backend/tests/fixtures/_generated/
